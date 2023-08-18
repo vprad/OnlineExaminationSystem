@@ -10,11 +10,17 @@ COPY build.gradle settings.gradle /app/
 # Copy the source code into the container
 COPY src /app/src
 
+# Copy the gradlew script into the container
+COPY gradlew /app/gradlew
+
+# Make the gradlew script executable
+RUN chmod +x gradlew
+
 # Build the application using Gradle
 RUN ./gradlew build
 
 # Expose the port that the Spring Boot application will listen on
-EXPOSE 8082
+EXPOSE 8080
 
 # Start the Spring Boot application when the container runs
 CMD ["java", "-jar", "build/libs/your-application-name.jar"]
