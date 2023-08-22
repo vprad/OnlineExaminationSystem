@@ -1,26 +1,18 @@
-# Use an official OpenJDK base image
-FROM openjdk:11-jdk
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:11-jre-slim
 
-# Set the working directory inside the container
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the Gradle build files into the container
-COPY build.gradle settings.gradle /app/
+# Copy the Gradle Wrapper files into the container at /app
+COPY gradlew .
+COPY gradle gradle
 
-# Copy the source code into the container
-COPY src /app/src
+# Copy the rest of your application code
+COPY . .
 
-# Copy the gradlew script into the container
-COPY gradlew /app/gradlew
+# Run the Gradle build
+RUN chmod +x gradlew && ./gradlew build
 
-# Make the gradlew script executable
-RUN chmod +x gradlew
-
-# Build the application using Gradle
-RUN ./gradlew build
-
-# Expose the port that the Spring Boot application will listen on
-EXPOSE 8080
-
-# Start the Spring Boot application when the container runs
-CMD ["java", "-jar", "build/libs/your-application-name.jar"]
+# Specify the command to run your application (if applicable)
+# CMD ["java", "-jar", "your-application.jar"]
