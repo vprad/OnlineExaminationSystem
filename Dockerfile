@@ -1,5 +1,5 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:11-jre-slim
+# Use an official OpenJDK image that includes the JDK
+FROM openjdk:11-jdk-slim
 
 # Set the working directory to /app
 WORKDIR /app
@@ -16,3 +16,4 @@ RUN chmod +x gradlew && ./gradlew build
 
 # Specify the command to run your application (if applicable)
 # CMD ["java", "-jar", "your-application.jar"]
+
