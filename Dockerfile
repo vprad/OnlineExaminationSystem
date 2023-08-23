@@ -15,5 +15,5 @@ COPY . .
 RUN chmod +x gradlew && ./gradlew build
 
 # Specify the command to run your application (if applicable)
-# CMD ["java", "-jar", "your-application.jar"]
+CMD ["java", "-jar", "your-application.jar"]
 
